@@ -13,23 +13,33 @@
 <body class="mainpage">
 <div class="fullsizecontainer">
 <svg viewBox="0 0 2 2" class="visualbyte" style="background:#cccccc;" >
-<rect x="0" y="0" width="1" height="1"/>
+<rect id="TESTID" x="0" y="0" width="1" height="1"/>
 <rect x="1" y="1" width="1" height="1"/>
 </svg>
 </div>
 <p>
 <div onclick="addSpaceToAllBits()">[click to add space to each bit]</div>
-
 <b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
+<b style="color:black">b1</b>
+<b style="color:black">b2</b>
 </div>
 
 <script>
 function addSpaceToAllBits() {
 	var thename = document.getElementById("MeinName");
-	thename.style = "color:red"
+	thename.style = "color:red";
+	var therect = document.getElementById("TESTID");
+	//therect.style = "fill:red";
+	var allbs = document.getElementsByTagName("b");
+	var i;
+	for (i = 0; i < allbs.length; i++) {
+    allbs[i].style = "color:green";}
+
+	var allrects = document.getElementsByTagName("rect");
+	var i;
+	for (i = 0; i < allrects.length; i++) {
+    allrects[i].style = "fill:red";}
 }
 </script>
-
 </body>
-
 </html>
