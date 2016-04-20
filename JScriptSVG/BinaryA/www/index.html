@@ -18,10 +18,18 @@
 </svg>
 </div>
 <p>
-<a id="enterlink" href="./katalog/">
-<b>Martin&nbsp;Brösamle</b>
-</p>
+<div onclick="addSpaceToAllBits()">[click to add space to each bit]</div>
+
+<b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
 </div>
+
+<script>
+function addSpaceToAllBits() {
+	var thename = document.getElementById("MeinName");
+	thename.style = "color:red"
+}
+</script>
+
 </body>
 
 </html>
