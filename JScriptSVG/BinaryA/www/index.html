@@ -18,7 +18,8 @@
 </svg>
 </div>
 <p>
-<div onclick="addSpaceToAllBits()">[click to add space to each bit]</div>
+
+<button onclick="addSpaceToAllBits()">Add space between all bits</button>
 <b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
 <b style="color:black">b1</b>
 <b style="color:black">b2</b>
@@ -29,32 +30,15 @@ function movedownRect(rect) {
 	rect.setAttribute('y', parseInt(rect.getAttribute("y"))+1);
 }
 
-
-//function mapCol(col,f) {
-//	for (i = 0; i < col.length; i++) {
-//		f(col[i]);
-//	}	
-//}
-	
 function addSpaceToAllBits() {	
 	var allrects = document.getElementsByTagName("rect");
 	var rectsarr = [];
 	for(var i = 0, n; n = allrects[i]; ++i) rectsarr.push(n);
 
-	var i;
-	
 	while (rectsarr.length > 0) {
-		//mapCol(allrects,movedownRect);
 		rectsarr.map(movedownRect)
-
 		rectsarr.shift()
 	}	
-
-
-	// lets keep this for control purposes
-	var allbs = document.getElementsByTagName("b");
-	var i;
-	for (i = 0; i < allbs.length; i++) { allbs[i].style = "color:green"; }
 }
 </script>
 </body>
