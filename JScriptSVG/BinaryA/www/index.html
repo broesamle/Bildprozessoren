@@ -20,7 +20,7 @@
 <p>
 
 <button onclick="addSpaceToAllBits()">(1) Add space between</button>
-<button onclick="addBitToByte()">(2) Add bit to byte</button>
+<button onclick="addBitToByte()">(2) Add bit to all bits</button>
 <b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
 <b style="color:black">b1</b>
 <b style="color:black">b2</b>
@@ -38,7 +38,7 @@ function movedownRect(rect) {
 	rect.setAttribute('y', parseInt(rect.getAttribute("y"))+1);
 }
 
-function addBitToByte() {
+function addBitToAllBits() {
 	var rectsarr = getAllRectsArray()
 	var template = rectsarr[0].cloneNode()
 	
