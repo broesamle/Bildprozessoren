@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" type="text/css" href="./start.css">
 <link rel="stylesheet" type="text/css" href="style.css">
-<title>Martin Brösamle/der Katalog</title>
+<title>WysiwyC - What you see is what you compute.</title>
 </head>
 
 <body class="mainpage">
@@ -46,22 +46,22 @@ function addBitToByte() {
 	template.setAttribute("width",parseInt(template.getAttribute("width"))*2);
 	
 	function f (rect) {
-		var x = parseInt(rect.getAttribute("x"))
-		var y = parseInt(rect.getAttribute("y"))
-		var clon = template.cloneNode()
-		clon.setAttribute("x",x)
-		clon.setAttribute("y",y+1)
-		rect.appendChild(clon)
+		var x = parseInt(rect.getAttribute("x"));
+		var y = parseInt(rect.getAttribute("y"));
+		var clon = template.cloneNode();
+		//clon.setAttribute("x",x);
+		clon.setAttribute("y",y-1);
+		rect.parentNode.insertBefore(clon,rect);
 	} 
-	rectsarr.map(f)
+	rectsarr.map(f);
 }
 
 function addSpaceToAllBits() {	
 	var rectsarr = getAllRectsArray()
 	while (rectsarr.length > 0) {
-		rectsarr.map(movedownRect)
-		rectsarr.shift()
-	}	
+		rectsarr.map(movedownRect);
+		rectsarr.shift();
+	}
 }
 </script>
 </body>
