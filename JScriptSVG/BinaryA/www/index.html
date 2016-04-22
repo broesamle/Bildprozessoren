@@ -12,17 +12,18 @@
 
 <body class="mainpage">
 <div class="fullsizecontainer">
-<svg viewBox="0 0 2 20" class="visualbyte" style="background:#cccccc;" >
+<svg viewBox="0 0 64 64" class="visualbyte" style="background:#cccccc;" >
 <rect x="0" y="0" width="1" height="1"/>
 <rect x="1" y="1" width="1" height="1"/>
 </svg>
 </div>
 <p>
 
-<button onclick="addSpaceToAllBits()">(1) Add space between</button>
-<button onclick="addBitToAllBits()">(2) Add bit to all bits</button>
-<button onclick="addSpaceToAllBytes()">(3) Add space to all bytes</button>
-<button onclick="addBitToAllBytes()">(4) Add bit to all bits</button>
+<button onclick="addSpaceToAllBits()">(1) Add space between all bits.</button><br>
+<button onclick="addBitToAllBits()">(2) Add a double size bit to all bits.</button><br>
+<button onclick="addSpaceToAllBytes()">(3) Add space to bits of equal length to the uppermost bit.</button><br>
+<button onclick="addBitToAllBytes()">(4) Add a double size bit to bits of equal length to the uppermost bit.</button><br>
+<button onclick="copymoveRightDownAll()">(5) Coppy all bits to the right and down.</button><br>
 <b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
 <b style="color:black">b1</b>
 <b style="color:black">b2</b>
@@ -42,6 +43,8 @@ function movedownRect(rect) {
 
 function addSpaceToAllBits() {	
 	var rectsarr = getAllRectsArray()
+	
+		
 	while (rectsarr.length > 0) {
 		rectsarr.map(movedownRect);
 		rectsarr.shift();
@@ -90,13 +93,26 @@ function addBitToAllBytes() {
 		var x = parseInt(rect.getAttribute("x"));
 		var y = parseInt(rect.getAttribute("y"));
 		var clon = template.cloneNode();
-		//clon.setAttribute("x",x);
 		if (rect.getAttribute("width") == wi) {
 			clon.setAttribute("y",y-1);
 			rect.parentNode.insertBefore(clon,rect);
 		}
-	}
-	 
+	}	 
+	rectsarr.map(f);
+}
+
+function copymoveRightDownAll() {
+	var rectsarr = getAllRectsArray();
+	
+	var deltaX = parseInt(rectsarr[0].getAttribute("width"));
+	var deltaY = parseInt(rectsarr[rectsarr.length-1].getAttribute("y"))+1;
+
+	function f(rect) {
+		var clon = rect.cloneNode()
+		clon.setAttribute('x', parseInt(rect.getAttribute("x"))+deltaX);
+		clon.setAttribute('y', parseInt(rect.getAttribute("y"))+deltaY);
+		rect.parentNode.appendChild(clon)
+	}		
 	rectsarr.map(f);
 }
 
