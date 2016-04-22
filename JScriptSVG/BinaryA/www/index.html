@@ -19,22 +19,45 @@
 </div>
 <p>
 
-<button onclick="addSpaceToAllBits()">Add space between all bits</button>
+<button onclick="addSpaceToAllBits()">(1) Add space between</button>
+<button onclick="addBitToByte()">(2) Add bit to byte</button>
 <b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
 <b style="color:black">b1</b>
 <b style="color:black">b2</b>
 </div>
 
 <script>
+function getAllRectsArray() {
+	var allrects = document.getElementsByTagName("rect");
+	var rectsarr = [];
+	for(var i = 0, n; n = allrects[i]; ++i) rectsarr.push(n);
+	return rectsarr;
+}
+
 function movedownRect(rect) {
 	rect.setAttribute('y', parseInt(rect.getAttribute("y"))+1);
 }
 
-function addSpaceToAllBits() {	
-	var allrects = document.getElementsByTagName("rect");
-	var rectsarr = [];
-	for(var i = 0, n; n = allrects[i]; ++i) rectsarr.push(n);
+function addBitToByte() {
+	var rectsarr = getAllRectsArray()
+	var template = rectsarr[0].cloneNode()
+	
+	// well, let's see when its time for JQuery...
+	template.setAttribute("width",parseInt(template.getAttribute("width"))*2);
+	
+	function f (rect) {
+		var x = parseInt(rect.getAttribute("x"))
+		var y = parseInt(rect.getAttribute("y"))
+		var clon = template.cloneNode()
+		clon.setAttribute("x",x)
+		clon.setAttribute("y",y+1)
+		rect.appendChild(clon)
+	} 
+	rectsarr.map(f)
+}
 
+function addSpaceToAllBits() {	
+	var rectsarr = getAllRectsArray()
 	while (rectsarr.length > 0) {
 		rectsarr.map(movedownRect)
 		rectsarr.shift()
