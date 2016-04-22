@@ -13,14 +13,16 @@
 <body class="mainpage">
 <div class="fullsizecontainer">
 <svg viewBox="0 0 2 20" class="visualbyte" style="background:#cccccc;" >
-<rect id="TESTID" x="0" y="0" width="1" height="1"/>
+<rect x="0" y="0" width="1" height="1"/>
 <rect x="1" y="1" width="1" height="1"/>
 </svg>
 </div>
 <p>
 
 <button onclick="addSpaceToAllBits()">(1) Add space between</button>
-<button onclick="addBitToByte()">(2) Add bit to all bits</button>
+<button onclick="addBitToAllBits()">(2) Add bit to all bits</button>
+<button onclick="addSpaceToAllBytes()">(3) Add space to all bytes</button>
+<button onclick="addBitToAllBytes()">(4) Add bit to all bits</button>
 <b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
 <b style="color:black">b1</b>
 <b style="color:black">b2</b>
@@ -38,6 +40,14 @@ function movedownRect(rect) {
 	rect.setAttribute('y', parseInt(rect.getAttribute("y"))+1);
 }
 
+function addSpaceToAllBits() {	
+	var rectsarr = getAllRectsArray()
+	while (rectsarr.length > 0) {
+		rectsarr.map(movedownRect);
+		rectsarr.shift();
+	}
+}
+
 function addBitToAllBits() {
 	var rectsarr = getAllRectsArray()
 	var template = rectsarr[0].cloneNode()
@@ -49,20 +59,47 @@ function addBitToAllBits() {
 		var x = parseInt(rect.getAttribute("x"));
 		var y = parseInt(rect.getAttribute("y"));
 		var clon = template.cloneNode();
-		//clon.setAttribute("x",x);
 		clon.setAttribute("y",y-1);
 		rect.parentNode.insertBefore(clon,rect);
 	} 
 	rectsarr.map(f);
 }
 
-function addSpaceToAllBits() {	
+function addSpaceToAllBytes() {
 	var rectsarr = getAllRectsArray()
+	var wi = rectsarr[0].getAttribute("width")
+	
 	while (rectsarr.length > 0) {
 		rectsarr.map(movedownRect);
 		rectsarr.shift();
+		// skip all those which are not of width wi
+		while (rectsarr.length > 0 && rectsarr[0].getAttribute("width") != wi ) {
+			rectsarr.shift();
+		}
 	}
 }
+
+function addBitToAllBytes() {
+	var rectsarr = getAllRectsArray();
+	var template = rectsarr[0].cloneNode();
+	var wi = rectsarr[0].getAttribute("width");
+	
+	template.setAttribute("width",parseInt(template.getAttribute("width"))*2);
+	
+	function f (rect) {
+		var x = parseInt(rect.getAttribute("x"));
+		var y = parseInt(rect.getAttribute("y"));
+		var clon = template.cloneNode();
+		//clon.setAttribute("x",x);
+		if (rect.getAttribute("width") == wi) {
+			clon.setAttribute("y",y-1);
+			rect.parentNode.insertBefore(clon,rect);
+		}
+	}
+	 
+	rectsarr.map(f);
+}
+
 </script>
 </body>
 </html>
