@@ -7,28 +7,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" type="text/css" href="./start.css">
 <link rel="stylesheet" type="text/css" href="style.css">
-<title>WysiwyC - What you see is what you compute.</title>
+<title>WysiwyC: Visual Binary Table</title>
 </head>
-
 <body class="mainpage">
+<h1>WysiwyC: Visual Binary Table</h1>
+<p>
+Challenge: Create a graphical binary table using <q>graphical instructions</q>.<br>
+<a href="" onclick="return addSpaceToAllBits()" title="Add space between all bits.">Space between</a>&nbsp;|&nbsp;
+<a href="" onclick="return addBitToAllBits()" title="Add a double size bit to all bits.">Double to all</a>&nbsp;|&nbsp;
+<a href="" onclick="return addSpaceToAllBytes()" title="Add space to bits of equal length to the uppermost bit.">Space <q>uppermost-sized</q></a>&nbsp;|&nbsp;
+<a href="" onclick="return addBitToAllBytes()" title="Add a double size bit to bits of equal length to the uppermost bit.">Double to <q>uppermost-sized</q></a>&nbsp;|&nbsp;
+<a href="" onclick="return copymoveRightDownAll()" title="Coppy all bits to the right and down.">Copy all right-down</a>
+</p>
 <div class="fullsizecontainer">
 <svg viewBox="0 0 64 64" class="visualbyte" style="background:#cccccc;" >
 <rect x="0" y="0" width="1" height="1"/>
 <rect x="1" y="1" width="1" height="1"/>
 </svg>
 </div>
-<p>
-
-<button onclick="addSpaceToAllBits()">(1) Add space between all bits.</button><br>
-<button onclick="addBitToAllBits()">(2) Add a double size bit to all bits.</button><br>
-<button onclick="addSpaceToAllBytes()">(3) Add space to bits of equal length to the uppermost bit.</button><br>
-<button onclick="addBitToAllBytes()">(4) Add a double size bit to bits of equal length to the uppermost bit.</button><br>
-<button onclick="copymoveRightDownAll()">(5) Coppy all bits to the right and down.</button><br>
-<b id="MeinName" style="color:black">Martin&nbsp;Brösamle</b>
-<b style="color:black">b1</b>
-<b style="color:black">b2</b>
-</div>
-
 <script>
 function getAllRectsArray() {
 	var allrects = document.getElementsByTagName("rect");
@@ -44,20 +40,18 @@ function movedownRect(rect) {
 function addSpaceToAllBits() {	
 	var rectsarr = getAllRectsArray()
 	
-		
 	while (rectsarr.length > 0) {
 		rectsarr.map(movedownRect);
 		rectsarr.shift();
 	}
+	return false;
 }
 
 function addBitToAllBits() {
 	var rectsarr = getAllRectsArray()
 	var template = rectsarr[0].cloneNode()
-	
-	// well, let's see when its time for JQuery...
-	template.setAttribute("width",parseInt(template.getAttribute("width"))*2);
-	
+
+	template.setAttribute("width",parseInt(template.getAttribute("width"))*2);	
 	function f (rect) {
 		var x = parseInt(rect.getAttribute("x"));
 		var y = parseInt(rect.getAttribute("y"));
@@ -66,20 +60,20 @@ function addBitToAllBits() {
 		rect.parentNode.insertBefore(clon,rect);
 	} 
 	rectsarr.map(f);
+	return false;
 }
 
 function addSpaceToAllBytes() {
 	var rectsarr = getAllRectsArray()
 	var wi = rectsarr[0].getAttribute("width")
-	
 	while (rectsarr.length > 0) {
 		rectsarr.map(movedownRect);
 		rectsarr.shift();
-		// skip all those which are not of width wi
 		while (rectsarr.length > 0 && rectsarr[0].getAttribute("width") != wi ) {
 			rectsarr.shift();
 		}
 	}
+	return false;
 }
 
 function addBitToAllBytes() {
@@ -99,11 +93,11 @@ function addBitToAllBytes() {
 		}
 	}	 
 	rectsarr.map(f);
+	return false;
 }
 
 function copymoveRightDownAll() {
-	var rectsarr = getAllRectsArray();
-	
+	var rectsarr = getAllRectsArray();	
 	var deltaX = parseInt(rectsarr[0].getAttribute("width"));
 	var deltaY = parseInt(rectsarr[rectsarr.length-1].getAttribute("y"))+1;
 
@@ -114,8 +108,8 @@ function copymoveRightDownAll() {
 		rect.parentNode.appendChild(clon)
 	}		
 	rectsarr.map(f);
+	return false;
 }
-
 </script>
 </body>
 </html>
