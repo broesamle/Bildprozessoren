@@ -4,6 +4,7 @@ html,body {
 	padding: 0;
 	margin: 0; 
 	width:100%;
+	height:1000%;
 }
 
 a:link { 
@@ -16,9 +17,8 @@ a:visited {
 }
 
 .visualbyte {
-	/*clear:left;*/
-	height:480px;
-	width:480px;
+	overflow:visible;
+	width:256px;
 	display:block;
 }
 

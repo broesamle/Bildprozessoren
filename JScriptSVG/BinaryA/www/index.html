@@ -12,15 +12,16 @@
 <body class="mainpage">
 <h1>WysiwyC: Visual Binary Table</h1>
 <p>
-Challenge: Create a graphical binary table using <q>graphical instructions</q>.<br>
+<b>Challenge: Create a graphical binary table using <q>graphical instructions</q></b>. In fact, the instructions collect their information from wird spots in the SVG-dom, so that there is not much possible except the binary table (or screw it up completely :-)<br>
 <a href="" onclick="return addSpaceToAllBits()" title="Add space between all bits.">Space between</a>&nbsp;|&nbsp;
-<a href="" onclick="return addBitToAllBits()" title="Add a double size bit to all bits.">Double to all</a>&nbsp;|&nbsp;
+<a href="" onclick="return addBitToAllBits()" title="Add a bit (double the size of the uppermost bit) to all bits.">Upper-double to all</a>&nbsp;|&nbsp;
 <a href="" onclick="return addSpaceToAllBytes()" title="Add space to bits of equal length to the uppermost bit.">Space <q>uppermost-sized</q></a>&nbsp;|&nbsp;
 <a href="" onclick="return addBitToAllBytes()" title="Add a double size bit to bits of equal length to the uppermost bit.">Double to <q>uppermost-sized</q></a>&nbsp;|&nbsp;
-<a href="" onclick="return copymoveRightDownAll()" title="Coppy all bits to the right and down.">Copy all right-down</a>
+<a href="" onclick="return copymoveRightDownAll()" title="Copy all bits to the right and down (based on the size of the uppermost one).">Copy all right-down</a><br>
+<input id="zoomer" onchange="updateZoom()" type="range" value="100" min="10" max="1000">
 </p>
 <div class="fullsizecontainer">
-<svg viewBox="0 0 64 64" class="visualbyte" style="background:#cccccc;" >
+<svg id="thecanvas" viewBox="0 0 64 64" class="visualbyte" >
 <rect x="0" y="0" width="1" height="1"/>
 <rect x="1" y="1" width="1" height="1"/>
 </svg>
@@ -109,6 +110,12 @@ function copymoveRightDownAll() {
 	}		
 	rectsarr.map(f);
 	return false;
+}
+
+function updateZoom() {
+	var zoomer = document.getElementById("zoomer");
+	var can = document.getElementById("thecanvas");
+	can.setAttribute("viewBox", "0 0 " + (6400/zoomer.value) + " " + (6400/zoomer.value));
 }
 </script>
 </body>
