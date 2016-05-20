@@ -11,4 +11,4 @@ Visual Binary Table
 -------------------
 Using HTML, Inline SVG, JScript
 
-[The demo](JScriptSVG/BinaryA/www/index.html)
+You can find a [demo online](http://m-broe.de/2016/WysiwyC/).
